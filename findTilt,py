@@ -1,0 +1,19 @@
+ class Solution:
+    def findTilt(self, root: Optional[TreeNode]) -> int:
+
+        def sumAndTilt(node):
+            if not node:
+                return (0,0)
+            
+            leftSum, leftTilt = sumAndTilt(node.left)
+            rightSum, rightTilt = sumAndTilt(node.right)
+            
+            myCurrTilt = abs(leftSum - rightSum)
+            
+            return (leftSum + rightSum + node.val, leftTilt + rightTilt + myCurrTilt)
+        
+        return sumAndTilt(root)[1]
+            
+            
+            
+        
